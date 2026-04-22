@@ -1,13 +1,21 @@
 package com.sahil.assignment.service;
 
+
+
+import org.springframework.stereotype.Service;
+
+import com.sahil.assignment.repository.PostRepository;
+import com.sahil.assignment.repository.CommentRepository;
+
 import com.sahil.assignment.dto.CreateCommentRequest;
 import com.sahil.assignment.dto.CreatePostRequest;
+
 import com.sahil.assignment.model.Comment;
 import com.sahil.assignment.model.Post;
-import com.sahil.assignment.repository.CommentRepository;
-import com.sahil.assignment.repository.PostRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+
+
+
+
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -41,8 +49,9 @@ public class PostService {
         postRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException("Post not found with id: " + postId));
 
+        redisGuardrailService.checkVerticalCap(request.getDepthLevel());
+
         if (request.isBot()) {
-            redisGuardrailService.checkVerticalCap(request.getDepthLevel());
             redisGuardrailService.checkCooldown(request.getBotId(), request.getHumanId());
             redisGuardrailService.checkHorizontalCap(postId);
         }
