@@ -1,13 +1,11 @@
-version: '3.8'
-
 services:
   postgres:
     image: postgres:15
     container_name: assignment_postgres
     environment:
-      POSTGRES_DB: grid07db
-      POSTGRES_USER: grid07user
-      POSTGRES_PASSWORD: Root@1234
+      POSTGRES_DB: neondb
+      POSTGRES_USER: neondb_owner
+      POSTGRES_PASSWORD: npg_xlaVptL36oCG
     ports:
       - "5432:5432"
     volumes:

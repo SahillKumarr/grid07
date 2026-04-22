@@ -11,9 +11,9 @@ public class CreateCommentRequest {
 
     @NotNull
     private Long userId;
-    @NotNull
+
     private Long botId;
-    @NotNull
+
     private Long humanId;
     @NotBlank
     private String content;
