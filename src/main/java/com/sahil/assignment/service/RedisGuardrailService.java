@@ -33,11 +33,19 @@ public class RedisGuardrailService {
 
     public void checkCooldown(Long botId, Long humanId) {
         String key = "cooldown:bot_" + botId + ":human_" + humanId;
-        Boolean exists = redisTemplate.hasKey(key);
-        if (Boolean.TRUE.equals(exists)) {
-            throw new CooldownActiveException("Bot " + botId + " is on cooldown with human " + humanId);
+        try {
+            Boolean exists = redisTemplate.hasKey(key);
+
+            if (Boolean.TRUE.equals(exists)) {
+                throw new CooldownActiveException("Bot " + botId + " is on cooldown with human " + humanId);
+            }
+            redisTemplate.opsForValue().set(key, "1", 600, TimeUnit.SECONDS);
+
+        } catch (CooldownActiveException e) {
+            throw e;
+        } catch (Exception e) {
+            System.out.println("REDIS ERROR: " + e.getMessage());
         }
-        redisTemplate.opsForValue().set(key, "1", 600, TimeUnit.SECONDS);
     }
 
 

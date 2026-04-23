@@ -1,6 +1,7 @@
 package com.sahil.assignment.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.NotBlank;
@@ -20,5 +21,6 @@ public class CreateCommentRequest {
     @NotNull
     private Integer depthLevel;
 
+    @JsonProperty("isBot")
     private boolean isBot;
 }
