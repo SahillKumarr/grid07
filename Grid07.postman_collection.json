@@ -1,0 +1,247 @@
+{
+  "info": {
+    "_postman_id": "aa7a73f5-ab83-4b2e-874b-d8c24a0818ea",
+    "name": "Grid07",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "40723588"
+  },
+  "item": [
+    {
+      "name": "Create Post",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"userId\": 1,\r\n    \"content\": \"This is my first post\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/posts",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "posts"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Virality of the Post",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"userId\": 2,\r\n    \"botId\": 2,\r\n    \"humanId\": 1,\r\n    \"content\": \"Bot reply here\",\r\n    \"depthLevel\": 1,\r\n    \"isBot\": true\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/posts/1/virality",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "posts",
+            "1",
+            "virality"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add Bot Comment",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"userId\": 1,\r\n    \"botId\": 1,\r\n    \"humanId\": 1,\r\n    \"content\": \"Bot reply here\",\r\n    \"depthLevel\": 1,\r\n    \"isBot\": true\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/posts/2/comments",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "posts",
+            "2",
+            "comments"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add Human Comment",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"userId\": 1,\r\n    \"botId\": null,\r\n    \"humanId\": 1,\r\n    \"content\": \"Human comment here\",\r\n    \"depthLevel\": 1,\r\n    \"isBot\": false\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/posts/2/comments",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "posts",
+            "2",
+            "comments"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Liking the Post",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/posts/2/like?userId=1&isBot=false",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "posts",
+            "2",
+            "like"
+          ],
+          "query": [
+            {
+              "key": "userId",
+              "value": "1"
+            },
+            {
+              "key": "isBot",
+              "value": "false"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Test Depth Cap",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"userId\": 1,\r\n    \"botId\": 2,\r\n    \"humanId\": 1,\r\n    \"content\": \"Too deep comment\",\r\n    \"depthLevel\": 21,\r\n    \"isBot\": true\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/posts/1/comments",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "posts",
+            "1",
+            "comments"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Cooldown Test",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"userId\": 2,\r\n    \"botId\": 2,\r\n    \"humanId\": 1,\r\n    \"content\": \"Cooldown test\",\r\n    \"depthLevel\": 2,\r\n    \"isBot\": true\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/posts/2/comments",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "posts",
+            "2",
+            "comments"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
