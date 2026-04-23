@@ -20,7 +20,7 @@ public class Comment {
 
     private Long postId;
 
-    private Long userId;
+    private Long authorId;
 
     @Column(columnDefinition = "TEXT")
     private String content;

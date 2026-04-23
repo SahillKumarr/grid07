@@ -28,9 +28,7 @@ public class PostController {
     }
 
     @PostMapping("/{postId}/comments")
-    public ResponseEntity<ApiResponse> addComment(
-            @PathVariable Long postId,
-            @Valid @RequestBody CreateCommentRequest request) {
+    public ResponseEntity<ApiResponse> addComment(@PathVariable Long postId, @Valid @RequestBody CreateCommentRequest request) {
         Comment comment = postService.addComment(postId, request);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -38,9 +36,7 @@ public class PostController {
     }
 
     @PostMapping("/{postId}/like")
-    public ResponseEntity<ApiResponse> likePost(
-            @PathVariable Long postId,
-            @RequestParam Long userId,
+    public ResponseEntity<ApiResponse> likePost(@PathVariable Long postId, @RequestParam Long userId,
             @RequestParam(defaultValue = "false") boolean isBot) {
         postService.likePost(postId, userId, isBot);
         return ResponseEntity

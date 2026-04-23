@@ -8,7 +8,7 @@ import lombok.Data;
 public class CreatePostRequest {
 
     @NotNull
-    private Long userId;
+    private Long authorId;
 
     @NotBlank
     private String content;
